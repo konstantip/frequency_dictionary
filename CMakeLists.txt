@@ -2,17 +2,16 @@ cmake_minimum_required(VERSION 3.12)
 
 project(words_counter)
 
-add_compile_options(-W -Wall -pedantic)
+add_compile_options(-W -Wall -Werror -pedantic)
 
-find_package(Boost)
+set(WORDS_COUNTER_EXECUTABLE_NAME ${CMAKE_PROJECT_NAME})
 
-if(NOT Boost_FOUND)
-  message(FATAL "Boost was not found")
-endif()
+add_executable(${WORDS_COUNTER_EXECUTABLE_NAME} main.cpp)
 
-add_executable(${CMAKE_PROJECT_NAME} main.cpp frequency_dictionary/frequency_dictionary.cpp)
+set_property(TARGET ${WORDS_COUNTER_EXECUTABLE_NAME} PROPERTY CXX_STANDARD 17)
 
-set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+add_subdirectory(frequency_dictionary)
+target_link_libraries(${WORDS_COUNTER_EXECUTABLE_NAME} PRIVATE frequency_dictionary)
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${Boost_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE ${Boost_LIBRARIES})
+target_include_directories(${WORDS_COUNTER_EXECUTABLE_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
