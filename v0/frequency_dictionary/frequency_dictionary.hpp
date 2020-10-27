@@ -21,7 +21,7 @@ class FrequencyDictionary final
 
   struct Word final : boost::intrusive::list_base_hook<>
   {
-    explicit Word(std::string&& word) : word{std::move(word)}
+    explicit Word(std::string word) : word{std::move(word)}
     {}
 
     std::string word;
@@ -74,7 +74,7 @@ class FrequencyDictionary final
   FrequencyDictionary() = default;
 
   //It is not exception-safe, but only std::bad_alloc can be thrown, and in our task to handle it is meaningless
-  void addWord(std::string word);
+  void addWord(std::string& word);
 
   std::vector<WordWithCount> getResults();
 

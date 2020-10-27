@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 
-#include <frequency_dictionary/frequency_dictionary.hpp>
+#include <frequency_dictionary.hpp>
 
 void
 saveResults(std::ofstream& output, const std::vector<frequency_dictionary::FrequencyDictionary::WordWithCount>& results)

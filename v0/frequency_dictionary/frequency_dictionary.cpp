@@ -57,10 +57,21 @@ void FrequencyDictionary::WordsCount::getSortedWordsPointers(std::vector<Word*>&
             [](const Word* w1, const Word* w2) noexcept { return w1->word < w2->word; });
 }
 
-void FrequencyDictionary::addWord(std::string word)
+void FrequencyDictionary::addWord(std::string& word)
 {
   toLower(word);
-  const auto[it, inserted] = words_.emplace(std::move(word));
+
+  //Sorry for this, it will be fixed
+  const auto[it, inserted] = [&words = words_, &word]() {
+    Word tmp{std::move(word)};
+    const auto it_ = words.find(tmp);
+    word = std::move(tmp.word);
+    if (it_ != std::cend(words))
+    {
+      return std::pair{it_, false};
+    }
+    return words.emplace(word);
+  }();
 
   //It is needed because (*it) is const-qualified, it might be fixed wia using boost::intrusive::unordered_set
   if (Word& element = const_cast<Word&>(*it); inserted)
