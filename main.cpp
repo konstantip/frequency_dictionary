@@ -48,7 +48,6 @@ void countFromFile(std::ifstream& input, frequency_dictionary::FrequencyDictiona
       std::exit(-3);
     }
     std::size_t num_of_chars = input.gcount();
-    std::cout << "Block has been red\n";
 
     for (std::size_t i = 0; i < num_of_chars; ++i)
     {

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 
 project(words_counter)
 
-add_compile_options(-W -Wall -Werror -pedantic)
+add_compile_options(-O3 -W -Wall -Werror -pedantic)
 
 set(WORDS_COUNTER_EXECUTABLE_NAME ${CMAKE_PROJECT_NAME})
 
