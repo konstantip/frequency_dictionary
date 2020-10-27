@@ -25,7 +25,7 @@ class FrequencyDictionary final
     {}
 
     std::string word;
-    std::list<WordsCount>::iterator current_counter;
+    std::size_t current_counter;
 
     class Hasher final
     {
@@ -43,15 +43,11 @@ class FrequencyDictionary final
   class WordsCount final
   {
    public:
-    WordsCount(const std::size_t count, Word& word);
+    WordsCount(Word& word);
 
-    explicit WordsCount(const std::size_t count);
+    WordsCount() = default;
 
     [[nodiscard]] bool empty() const noexcept;
-
-    void setCount(const std::size_t new_count) noexcept;
-
-    [[nodiscard]] std::size_t count() const noexcept;
 
     void remove(const Word& word) noexcept;
 
@@ -60,7 +56,6 @@ class FrequencyDictionary final
     void getSortedWordsPointers(std::vector<Word*>& output_vector);
 
    private:
-    std::size_t count_;
     boost::intrusive::list<Word, boost::intrusive::constant_time_size<false>> words_;
   };
 
@@ -81,25 +76,18 @@ class FrequencyDictionary final
  private:
   static void toLower(std::string& str) noexcept;
 
-  std::list<WordsCount>::iterator
-  createCountBeforeIt(const std::size_t count, const std::list<WordsCount>::iterator it);
-
-  static void setCountToWord(Word& word, const std::list<WordsCount>::iterator count_it) noexcept;
-
-  void unsetCount(Word& word) noexcept;
-
   void addNew(Word& new_word);
 
-  void
-  addNewCountForWordBeforeIterator(const std::size_t count, Word& word, const std::list<WordsCount>::iterator it);
-
   bool itPointsToCount(std::list<WordsCount>::const_iterator it, const std::size_t count) const noexcept;
+
+  void setCountToWord(Word& word, const std::size_t pos) noexcept;
+
+  void unsetCount(Word& word) noexcept;
 
   void increaseWordCount(Word& word);
 
   std::unordered_set<Word, Word::Hasher, Word::EqualityChecker> words_;
-  std::list<WordsCount> free_counters_pool_;
-  std::list<WordsCount> counters_;
+  std::vector<WordsCount> counters_;
 };
 
 }
