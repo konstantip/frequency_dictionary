@@ -28,9 +28,10 @@ void toLower(std::string& str) noexcept
 }
 }
 
-void FrequencyDictionary::addWord(std::string word)
+void FrequencyDictionary::addWord(std::string& word)
 {
   toLower(word);
-  ++(words[std::move(word)]);
+
+  ++words[word];
 }
 }

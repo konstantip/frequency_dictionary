@@ -19,7 +19,7 @@ class FrequencyDictionary final
 
   FrequencyDictionary() = default;
 
-  void addWord(std::string word);
+  void addWord(std::string& word);
 
   std::vector<WordWithCount> getResults();
 
