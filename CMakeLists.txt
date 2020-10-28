@@ -10,7 +10,9 @@ add_executable(${WORDS_COUNTER_EXECUTABLE_NAME} main.cpp)
 
 set_property(TARGET ${WORDS_COUNTER_EXECUTABLE_NAME} PROPERTY CXX_STANDARD 17)
 
-set(VERSION 0)
+if (NOT VERSION)
+    set(VERSION 0)
+endif()
 
 if (VERSION EQUAL 0)
     add_subdirectory(v0/frequency_dictionary)
