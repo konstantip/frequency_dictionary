@@ -17,7 +17,7 @@ class FrequencyDictionary final
     std::string_view word;
   };
 
-  FrequencyDictionary() = default;
+  FrequencyDictionary();
 
   void addWord(std::string& word);
 

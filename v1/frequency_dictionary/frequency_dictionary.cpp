@@ -2,6 +2,11 @@
 
 namespace frequency_dictionary
 {
+FrequencyDictionary::FrequencyDictionary()
+{
+  words.reserve(10000000);
+}
+
 std::vector<FrequencyDictionary::WordWithCount> FrequencyDictionary::getResults()
 {
   std::vector<WordWithCount> result;
