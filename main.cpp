@@ -68,7 +68,6 @@ void countFromFile(std::ifstream& input, frequency_dictionary::FrequencyDictiona
 
     if (input.eof())
     {
-      std::cout << "EOF occured\n";
       if (!tmp_string.empty())
       {
         dictionary.addWord(tmp_string);
